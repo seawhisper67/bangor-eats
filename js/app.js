@@ -29,7 +29,7 @@ function greet(){if(body.dataset.done)return;body.dataset.done=1;add('bot','Hey!
 form.onsubmit=e=>{e.preventDefault();const t=cin.value.trim();if(!t)return;add('user',t.replace(/</g,'&lt;'));cin.value='';setTimeout(()=>answer(t),250);};
 function match(t){
  const tl=t.toLowerCase();
- const catMap={pizza:'Pizza',thai:'Thai',sushi:'Japanese',japanese:'Japanese',chinese:'Chinese',mexican:'Mexican',taco:'Mexican',indian:'Indian',steak:'Steakhouse',burger:'Burgers',coffee:'Coffee',boba:'Boba Tea',ice cream:'Ice Cream',seafood:'Seafood',italian:'Italian',sandwich:'Sandwiches & Deli',donut:'Coffee & Donuts',wings:'Wings & Bar Food',vietnamese:'Vietnamese',pho:'Vietnamese'};
+ const catMap={pizza:'Pizza',thai:'Thai',sushi:'Japanese',japanese:'Japanese',chinese:'Chinese',mexican:'Mexican',taco:'Mexican',indian:'Indian',steak:'Steakhouse',burger:'Burgers',coffee:'Coffee',boba:'Boba Tea','ice cream':'Ice Cream',seafood:'Seafood',italian:'Italian',sandwich:'Sandwiches & Deli',donut:'Coffee & Donuts',wings:'Wings & Bar Food',vietnamese:'Vietnamese',pho:'Vietnamese'};
  let pool=VENUES.slice();const cats=[];
  for(const[k,c]of Object.entries(catMap))if(tl.includes(k))cats.push(c);
  if(cats.length)pool=pool.filter(v=>v.categories.some(x=>cats.includes(x)));
