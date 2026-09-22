@@ -4,8 +4,20 @@ const SPECIALS=[];
 const BASE=(location.pathname.match(/\/(r|c)\//)?'../':'');
 // ---- search (client-side, instant) ----
 const q=document.getElementById('q');
-if(q){q.addEventListener('input',e=>{const t=e.target.value.trim().toLowerCase();if(t.length<2)return;history.replaceState(null,'','?q='+encodeURIComponent(t));});
-window.addEventListener('load',()=>{const p=new URLSearchParams(location.search).get('q');if(p)q.value=p;});}
+if(q){
+ const sres=document.getElementById('sres');
+ function doSearch(t){
+  if(!t||t.length<2){if(sres)sres.classList.remove('open');return;}
+  const tl=t.toLowerCase();
+  const hits=VENUES.filter(v=>(v.name+' '+v.categories.join(' ')+' '+(v.address||'')).toLowerCase().includes(tl)).slice(0,8);
+  if(!sres)return;
+  sres.innerHTML=hits.length?hits.map(v=>`<a class="srow" href="${BASE}r/${v.slug}.html"><div><h3>${v.name}</h3><div class="m">${v.categories.join(', ')} · ${v.address||'Bangor, ME'}</div></div></a>`).join(''):'<div style="padding:14px 16px;color:#9aa0ab">No matches — try "pizza", "thai", "seafood"…</div>';
+  sres.classList.add('open');
+ }
+ q.addEventListener('input',e=>{const t=e.target.value.trim();doSearch(t);history.replaceState(null,'','?q='+encodeURIComponent(t));});
+ document.addEventListener('click',e=>{if(sres&&!sres.contains(e.target)&&e.target!==q)sres.classList.remove('open');});
+ window.addEventListener('load',()=>{const p=new URLSearchParams(location.search).get('q');if(p){q.value=p;doSearch(p);}});
+}
 // ---- chat widget ----
 const fab=document.getElementById('cfab'),panel=document.getElementById('cpanel'),body=document.getElementById('cbody'),form=document.getElementById('cform'),cin=document.getElementById('cin'),chips=document.getElementById('chips');
 fab.onclick=()=>{panel.classList.toggle('open');if(panel.classList.contains('open'))greet();};

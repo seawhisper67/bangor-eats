@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seawhisper67.github.io/bangor-eats/r/jason-s-pizza.html">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@context": "https://schema.org", "@type": "WebSite", "name": "Bangor Eats", "url": "https://seawhisper67.github.io/bangor-eats/r/jason-s-pizza.html", "potentialAction": {"@type": "SearchAction", "target": "https://seawhisper67.github.io/bangor-eats/?q={search_term_string}", "query-input": "required name=search_term_string"}}, {"@type": "Restaurant", "name": "Jason's Pizza", "address": {"@type": "PostalAddress", "streetAddress": "Bangor, ME 04401", "addressLocality": "Bangor", "addressRegion": "ME"}, "servesCuisine": ["Pizza"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://seawhisper67.github.io/bangor-eats/"}, {"@type": "ListItem", "position": 2, "name": "Restaurants", "item": "https://seawhisper67.github.io/bangor-eats/restaurants.html"}, {"@type": "ListItem", "position": 3, "name": "Jason's Pizza"}]}]}</script>
 <style>
 :root{--bg:#0f1115;--card:#171a21;--card2:#1e2230;--fg:#e8eaed;--mut:#9aa0ab;--acc:#ff6b4a;--acc2:#ffb454;--ok:#4ade80;--bd:#262b37}
@@ -24,7 +24,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(15,17,21,.92);backdrop-f
 .nav a.nl{color:var(--mut);font-size:14px;font-weight:600;padding:6px 2px;border-bottom:2px solid transparent}
 .nav a.nl:hover,.nav a.nl.on{color:var(--fg);border-color:var(--acc)}
 .spacer{flex:1}
-.searchbox{display:flex;gap:8px;margin-top:14px}
+.searchbox{display:flex;gap:8px;margin-top:14px;position:relative}
 .searchbox input{flex:1;background:var(--card2);border:1px solid var(--bd);border-radius:10px;padding:13px 16px;color:var(--fg);font-size:16px;outline:none}
 .searchbox input:focus{border-color:var(--acc)}
 .hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;letter-spacing:-1px;margin-bottom:10px}
@@ -73,9 +73,16 @@ footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
 .chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 12px}
 .chip{background:var(--card2);border:1px solid var(--bd);color:var(--fg);font-size:13px;border-radius:999px;padding:6px 12px;cursor:pointer}
 .chip:hover{border-color:var(--acc)}
+.sres{position:absolute;left:0;right:0;top:100%;z-index:50;background:var(--card);border:1px solid var(--bd);border-radius:0 0 12px 12px;max-height:60vh;overflow-y:auto;display:none}
+.sres.open{display:block}
+.srow{display:flex;gap:10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--bd);text-decoration:none;color:var(--fg)}
+.srow:last-child{border-bottom:none}
+.srow:hover{background:var(--card2)}
+.srow h3{font-size:15px;margin:0}
+.srow .m{color:var(--mut);font-size:13px}
 @media(max-width:640px){.nav a.nl{display:none}.searchbox{margin-top:8px}}
-</style></head><body><header><div class="wrap nav"><a class="logo" href="..//">Bangor<b>Eats</b></a><a class="nl " href="..//">Home</a><a class="nl on" href="..//restaurants.html">Restaurants</a><a class="nl " href="..//specials.html">Specials & Deals</a><a class="nl " href="..//events.html">Food Events</a><span class="spacer"></span></div>
-<div class="wrap searchbox"><input id="q" type="search" placeholder='Search 88 Bangor restaurants — try "pizza", "thai", "happy hour"... ' autocomplete="off" aria-label="Search restaurants"></div></header><main class="wrap vdetail"><div class="crumbs"><a href="..//">Home</a> / <a href="../restaurants.html">Restaurants</a> / Jason&#x27;s Pizza</div>
+</style></head><body><header><div class="wrap nav"><a class="logo" href="../">Bangor<b>Eats</b></a><a class="nl " href="../">Home</a><a class="nl on" href="../restaurants.html">Restaurants</a><a class="nl " href="../specials.html">Specials & Deals</a><a class="nl " href="../events.html">Food Events</a><span class="spacer"></span></div>
+<div class="wrap searchbox"><input id="q" type="search" placeholder='Search 88 Bangor restaurants — try "pizza", "thai", "happy hour"... ' autocomplete="off" aria-label="Search restaurants"></div><div class="sres" id="sres"></div></header><main class="wrap vdetail"><div class="crumbs"><a href="../">Home</a> / <a href="../restaurants.html">Restaurants</a> / Jason&#x27;s Pizza</div>
 <h1>Jason&#x27;s Pizza</h1><div class="badges"><a class="tag" href="../c/pizza.html">Pizza</a><span class="price" style="font-size:15px">$$</span></div>
 <div class="facts"><div><b>Type</b><span>Fast Food</span></div>
 <div><b>Address</b><span>Bangor, ME</span></div>
