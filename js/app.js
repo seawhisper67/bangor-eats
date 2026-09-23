@@ -51,5 +51,33 @@ function answer(t){
    fetch(window.BE_CONFIG.deepseekProxy,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'system',content:'You are Bangor Eats, a food guide for Bangor, Maine. Venue data: '+VENUES.map(v=>v.name+' ('+v.categories.join('/')+')').join('; ')},{role:'user',content:t}]})})
    .then(r=>r.json()).then(j=>add('bot',(j.choices&&j.choices[0].message.content||'Hmm, no answer.').replace(/</g,'&lt;')))
    .catch(()=>add('bot',match(t)));
- }else add('bot',match(t));
+ }else add('bot',match(t));}
+// ---- daily specials calendar: prev/next month ----
+const cprev=document.getElementById('cprev'),cnext=document.getElementById('cnext');
+if(cprev&&window.CAL){
+ const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+ let cur=new Date(CALTODAY+'T00:00:00');cur.setDate(1);
+ function chipHtml(c){return '<a class="chip" href="'+c.u+'"><b>'+c.n+'</b> '+c.t+'</a>';}
+ function render(y,m){
+  document.getElementById('ctitle').textContent=new Date(y,m,1).toLocaleString('en-US',{month:'long',year:'numeric'});
+  const first=new Date(y,m,1),off=(first.getDay()+6)%7,start=new Date(y,m,1-off);
+  let cells='';
+  for(let k=0;k<42;k++){
+   const d=new Date(start.getFullYear(),start.getMonth(),start.getDate()+k);
+   const inM=d.getMonth()===m;
+   const wd=(d.getDay()===0)?6:d.getDay()-1; // Mon=0..Sun=6
+   let inner='<span class="dn">'+d.getDate()+'</span>';
+   if(inM){
+    window.CAL.events.forEach(e=>{if(e.w===wd)inner+='<div class="evchip">🥕 '+e.n+'</div>';});
+    const chs=window.CAL.chips[wd]||[];
+    inner+=chs.slice(0,4).map(chipHtml).join('');
+    if(chs.length>4)inner+='<a class="morechips" href="'+BASE+'specials.html">+'+(chs.length-4)+' more →</a>';
+   }
+   const today=new Date();const isT=d.getFullYear()===today.getFullYear()&&d.getMonth()===today.getMonth()&&d.getDate()===today.getDate();
+   cells+='<div class="mc'+(isT?' today':'')+(inM?'':' out')+'">'+inner+'</div>';
+  }
+  document.querySelector('.mcal').innerHTML=cells;
+ }
+ cprev.onclick=()=>{cur.setMonth(cur.getMonth()-1);render(cur.getFullYear(),cur.getMonth());};
+ cnext.onclick=()=>{cur.setMonth(cur.getMonth()+1);render(cur.getFullYear(),cur.getMonth());};
 }
